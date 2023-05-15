@@ -148,7 +148,7 @@ def tor_v3_links():
                         repeat = True
                         break
                         
-        except:
+        except FileNotFoundError:
             pass
         
         if not repeat:
