@@ -134,7 +134,6 @@ def tor_v3_verify(tor_verify):
     sys.exit()
 
 def tor_v3_links():
-
     while True:
         public = ed25519.Ed25519PrivateKey.generate().sign(b"")[:32]
         checksum = hashlib.sha3_256(b".onion checksum" + public + b"\x03").digest()[:2]
@@ -146,7 +145,7 @@ def tor_v3_links():
 def tor_v3_main(file=None, tor_threads=1, tor_verify=None, vanity=None, verbose=True, links=False):
     if links:
            for i in range(tor_threads):
-                threading.Thread(target=tor_v3).start()
+                threading.Thread(target=tor_v3_links).start()
     
     else:
         if tor_verify != None:
