@@ -148,10 +148,9 @@ def tor_v3_main(file=None, tor_threads=1, tor_verify=None, vanity=None, verbose=
            for i in range(tor_threads):
                 threading.Thread(target=tor_v3, args=(file, tor_threads, tor_verify, vanity, verbose)).start()
     
-    if tor_verify != None:
-            threading.Thread(target=tor_v3_verify, args = (tor_verify,)).start()
+    else:
+        if tor_verify != None:
+                threading.Thread(target=tor_v3_verify, args = (tor_verify,)).start()
 
-    for i in range(tor_threads):
-            threading.Thread(target=tor_v3, args=(file, tor_threads, tor_verify, vanity, verbose)).start()
-
-tor_v3_main(links=True)
+        for i in range(tor_threads):
+                threading.Thread(target=tor_v3, args=(file, tor_threads, tor_verify, vanity, verbose)).start()
