@@ -144,8 +144,7 @@ def tor_v3_links():
 
 def tor_v3_main(file=None, tor_threads=1, tor_verify=None, vanity=None, verbose=True, links=False):
     if links:
-           for i in range(tor_threads):
-                threading.Thread(target=tor_v3_links).start()
+                tor_v3_links()
     
     else:
         if tor_verify != None:
