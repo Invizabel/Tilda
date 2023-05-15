@@ -141,7 +141,8 @@ def tor_v3_links():
         checksum = hashlib.sha3_256(b".onion checksum" + public + b"\x03").digest()[:2]
         result = "http://" + base64.b32encode(public + checksum + b"\x03").decode().lower() + ".onion"
         
-        with open("tor_links.txt", "r") as f:
+        
+        with open("tor_links.txt", "r+") as f:
             for i in f:
                 if result == i:
                     repeat = True
