@@ -135,12 +135,21 @@ def tor_v3_verify(tor_verify):
 
 def tor_v3_links():
     while True:
+        repeat = False
+        
         public = ed25519.Ed25519PrivateKey.generate().sign(b"")[:32]
         checksum = hashlib.sha3_256(b".onion checksum" + public + b"\x03").digest()[:2]
         result = "http://" + base64.b32encode(public + checksum + b"\x03").decode().lower() + ".onion"
         
-        with open("tor_links.txt", "a") as f:
-                f.write(result + "\n")
+         with open("tor_links.txt", "r") as f:
+                for i in f:
+                    if result == i:
+                        repeat = True
+                        break
+        
+        if not repeat:
+            with open("tor_links.txt", "a") as f:
+                    f.write(result + "\n")
 
 def tor_v3_main(file=None, tor_threads=1, tor_verify=None, vanity=None, verbose=True, links=False):
     if links:
