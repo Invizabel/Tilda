@@ -144,7 +144,7 @@ def tor_v3_links():
         try:
             with open("tor_links.txt", "r") as f:
                 for i in f:
-                    if result == i:
+                    if result in i:
                         repeat = True
                         break
                         
